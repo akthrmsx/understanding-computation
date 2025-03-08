@@ -184,7 +184,7 @@ impl Reducer for Statement {
                 Box::new(Self::Sequence(body.clone(), Box::new(statement.clone()))),
                 Box::new(Self::Nothing),
             ),
-            Self::Nothing => Self::Nothing,
+            statement @ Self::Nothing => statement.clone(),
         }
     }
 }
