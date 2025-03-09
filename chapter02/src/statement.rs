@@ -19,12 +19,12 @@ impl Display for Statement {
             Self::If(condition, consequence, alternative) => {
                 write!(
                     f,
-                    "if ( {} ) {{ {} }} else {{ {} }}",
+                    "if ({}) {{ {} }} else {{ {} }}",
                     condition, consequence, alternative
                 )
             }
             Self::Sequence(first, second) => write!(f, "{}; {}", first, second),
-            Self::While(condition, body) => write!(f, "while ( {} ) {{ {} }}", condition, body),
+            Self::While(condition, body) => write!(f, "while ({}) {{ {} }}", condition, body),
             Self::Nothing => write!(f, "nothing"),
         }
     }

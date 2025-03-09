@@ -3,6 +3,7 @@ use evaluator::Evaluator;
 use expression::Expression;
 use machine::Machine;
 use statement::Statement;
+use transpiler::Transpiler;
 
 mod environment;
 mod evaluator;
@@ -10,6 +11,7 @@ mod expression;
 mod machine;
 mod reducer;
 mod statement;
+mod transpiler;
 
 pub fn main() {
     {
@@ -56,5 +58,25 @@ pub fn main() {
         statement.evaluate(&mut environment);
 
         println!("{}", environment);
+    }
+
+    {
+        let statement = Statement::While(
+            Expression::LessThan(
+                Box::new(Expression::Variable("x".into())),
+                Box::new(Expression::Number(5)),
+            ),
+            Box::new(Statement::Assign(
+                "x".into(),
+                Expression::Multiply(
+                    Box::new(Expression::Variable("x".into())),
+                    Box::new(Expression::Number(3)),
+                ),
+            )),
+        );
+
+        let transpiled = statement.transpile();
+
+        println!("{}", transpiled);
     }
 }
