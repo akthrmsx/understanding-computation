@@ -4,7 +4,7 @@ use crate::{
     finite_automaton_state::FiniteAutomatonState,
 };
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone)]
 pub struct DeterministicFiniteAutomatonDesign<T> {
     start_state: T,
     accept_states: Vec<T>,

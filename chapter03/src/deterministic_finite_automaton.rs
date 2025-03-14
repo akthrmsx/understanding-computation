@@ -3,7 +3,7 @@ use crate::{
     finite_automaton_state::FiniteAutomatonState,
 };
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone)]
 pub struct DeterministicFiniteAutomaton<T> {
     current_state: T,
     accept_states: Vec<T>,

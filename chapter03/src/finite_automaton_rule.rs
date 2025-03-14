@@ -1,6 +1,6 @@
 use crate::finite_automaton_state::FiniteAutomatonState;
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct FiniteAutomatonRule<T> {
     state: T,
     character: char,

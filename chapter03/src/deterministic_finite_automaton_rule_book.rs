@@ -2,7 +2,7 @@ use crate::{
     finite_automaton_rule::FiniteAutomatonRule, finite_automaton_state::FiniteAutomatonState,
 };
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone)]
 pub struct DeterministicFiniteAutomatonRuleBook<T> {
     rules: Vec<FiniteAutomatonRule<T>>,
 }
