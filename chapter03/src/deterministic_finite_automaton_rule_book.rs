@@ -14,11 +14,11 @@ impl<T> DeterministicFiniteAutomatonRuleBook<T> {
 }
 
 impl<T: FiniteAutomatonState> DeterministicFiniteAutomatonRuleBook<T> {
-    pub fn next_state(&self, state: T, character: char) -> Option<T> {
+    pub fn next_state(&self, state: T, character: Option<char>) -> Option<T> {
         self.rule_for(state, character).map(|rule| rule.follow())
     }
 
-    pub fn rule_for(&self, state: T, character: char) -> Option<FiniteAutomatonRule<T>> {
+    pub fn rule_for(&self, state: T, character: Option<char>) -> Option<FiniteAutomatonRule<T>> {
         self.rules
             .iter()
             .find(|rule| rule.applies_to(state.clone(), character))

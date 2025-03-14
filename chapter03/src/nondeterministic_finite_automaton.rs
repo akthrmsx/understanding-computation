@@ -28,7 +28,7 @@ impl<T> NondeterministicFiniteAutomaton<T> {
 impl<T: FiniteAutomatonState> NondeterministicFiniteAutomaton<T> {
     pub fn accepting(&self) -> bool {
         !self
-            .current_states
+            .current_states()
             .intersection(&self.accept_states)
             .collect::<HashSet<_>>()
             .is_empty()
@@ -37,12 +37,16 @@ impl<T: FiniteAutomatonState> NondeterministicFiniteAutomaton<T> {
     pub fn read_character(&mut self, character: char) {
         self.current_states = self
             .rule_book
-            .next_state(self.current_states.clone(), character);
+            .next_state(self.current_states().clone(), Some(character));
     }
 
     pub fn read_string<S: Into<String>>(&mut self, string: S) {
         for character in string.into().chars() {
             self.read_character(character);
         }
+    }
+
+    pub fn current_states(&self) -> HashSet<T> {
+        self.rule_book.follow_free_move(self.current_states.clone())
     }
 }

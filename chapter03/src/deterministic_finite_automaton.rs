@@ -34,7 +34,7 @@ impl<T: FiniteAutomatonState> DeterministicFiniteAutomaton<T> {
     pub fn read_character(&mut self, character: char) {
         if let Some(state) = self
             .rule_book
-            .next_state(self.current_state.clone(), character)
+            .next_state(self.current_state.clone(), Some(character))
         {
             self.current_state = state;
         }
