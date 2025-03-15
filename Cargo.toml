@@ -1,2 +1,6 @@
 [workspace]
 members = ["chapter02", "chapter03"]
+
+[workspace.dependencies]
+anyhow = "1.0.97"
+nom = "8.0.0"
