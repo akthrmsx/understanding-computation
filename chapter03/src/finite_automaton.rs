@@ -1,0 +1,8 @@
+pub mod deterministic_finite_automaton;
+pub mod deterministic_finite_automaton_design;
+pub mod deterministic_finite_automaton_rule_book;
+pub mod finite_automaton_rule;
+pub mod finite_automaton_state;
+pub mod nondeterministic_finite_automaton;
+pub mod nondeterministic_finite_automaton_design;
+pub mod nondeterministic_finite_automaton_rule_book;

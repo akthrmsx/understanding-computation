@@ -1,4 +1,4 @@
-use crate::{
+use super::{
     deterministic_finite_automaton_rule_book::DeterministicFiniteAutomatonRuleBook,
     finite_automaton_state::FiniteAutomatonState,
 };
@@ -31,7 +31,7 @@ impl<T: FiniteAutomatonState> DeterministicFiniteAutomaton<T> {
             .any(|state| *state == self.current_state)
     }
 
-    pub fn read_character(&mut self, character: char) {
+    fn read_character(&mut self, character: char) {
         if let Some(state) = self
             .rule_book
             .next_state(self.current_state.clone(), Some(character))

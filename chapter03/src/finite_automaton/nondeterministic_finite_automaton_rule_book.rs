@@ -1,4 +1,4 @@
-use crate::{
+use super::{
     finite_automaton_rule::FiniteAutomatonRule, finite_automaton_state::FiniteAutomatonState,
 };
 use std::collections::HashSet;
@@ -8,13 +8,25 @@ pub struct NondeterministicFiniteAutomatonRuleBook<T> {
     rules: Vec<FiniteAutomatonRule<T>>,
 }
 
+impl<T> Default for NondeterministicFiniteAutomatonRuleBook<T> {
+    fn default() -> Self {
+        Self {
+            rules: Default::default(),
+        }
+    }
+}
+
 impl<T> NondeterministicFiniteAutomatonRuleBook<T> {
-    pub fn new(rules: Vec<FiniteAutomatonRule<T>>) -> Self {
-        Self { rules }
+    pub fn add_rule(&mut self, rule: FiniteAutomatonRule<T>) {
+        self.rules.push(rule);
     }
 }
 
 impl<T: FiniteAutomatonState> NondeterministicFiniteAutomatonRuleBook<T> {
+    pub fn rules(&self) -> Vec<FiniteAutomatonRule<T>> {
+        self.rules.clone()
+    }
+
     pub fn next_state(&self, states: HashSet<T>, character: Option<char>) -> HashSet<T> {
         states
             .iter()
@@ -22,14 +34,14 @@ impl<T: FiniteAutomatonState> NondeterministicFiniteAutomatonRuleBook<T> {
             .collect()
     }
 
-    pub fn follow_rules_for(&self, state: T, character: Option<char>) -> HashSet<T> {
+    fn follow_rules_for(&self, state: T, character: Option<char>) -> HashSet<T> {
         self.rule_for(state, character)
             .iter()
             .map(|rule| rule.follow())
             .collect()
     }
 
-    pub fn rule_for(&self, state: T, character: Option<char>) -> Vec<FiniteAutomatonRule<T>> {
+    fn rule_for(&self, state: T, character: Option<char>) -> Vec<FiniteAutomatonRule<T>> {
         self.rules
             .iter()
             .filter(|rule| rule.applies_to(state.clone(), character))

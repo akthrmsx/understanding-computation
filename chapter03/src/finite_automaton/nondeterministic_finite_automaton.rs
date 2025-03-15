@@ -1,4 +1,4 @@
-use crate::{
+use super::{
     finite_automaton_state::FiniteAutomatonState,
     nondeterministic_finite_automaton_rule_book::NondeterministicFiniteAutomatonRuleBook,
 };
@@ -34,7 +34,7 @@ impl<T: FiniteAutomatonState> NondeterministicFiniteAutomaton<T> {
             .is_empty()
     }
 
-    pub fn read_character(&mut self, character: char) {
+    fn read_character(&mut self, character: char) {
         self.current_states = self
             .rule_book
             .next_state(self.current_states().clone(), Some(character));
@@ -46,7 +46,7 @@ impl<T: FiniteAutomatonState> NondeterministicFiniteAutomaton<T> {
         }
     }
 
-    pub fn current_states(&self) -> HashSet<T> {
+    fn current_states(&self) -> HashSet<T> {
         self.rule_book.follow_free_move(self.current_states.clone())
     }
 }

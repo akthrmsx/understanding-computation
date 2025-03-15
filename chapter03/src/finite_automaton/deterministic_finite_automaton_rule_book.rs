@@ -1,4 +1,4 @@
-use crate::{
+use super::{
     finite_automaton_rule::FiniteAutomatonRule, finite_automaton_state::FiniteAutomatonState,
 };
 
@@ -18,7 +18,7 @@ impl<T: FiniteAutomatonState> DeterministicFiniteAutomatonRuleBook<T> {
         self.rule_for(state, character).map(|rule| rule.follow())
     }
 
-    pub fn rule_for(&self, state: T, character: Option<char>) -> Option<FiniteAutomatonRule<T>> {
+    fn rule_for(&self, state: T, character: Option<char>) -> Option<FiniteAutomatonRule<T>> {
         self.rules
             .iter()
             .find(|rule| rule.applies_to(state.clone(), character))

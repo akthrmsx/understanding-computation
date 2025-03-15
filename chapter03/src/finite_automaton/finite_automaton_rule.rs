@@ -1,4 +1,4 @@
-use crate::finite_automaton_state::FiniteAutomatonState;
+use super::finite_automaton_state::FiniteAutomatonState;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct FiniteAutomatonRule<T> {

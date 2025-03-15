@@ -1,4 +1,4 @@
-use crate::{
+use super::{
     deterministic_finite_automaton::DeterministicFiniteAutomaton,
     deterministic_finite_automaton_rule_book::DeterministicFiniteAutomatonRuleBook,
     finite_automaton_state::FiniteAutomatonState,
